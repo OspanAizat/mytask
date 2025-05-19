@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Conference ticket generator</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+
+    body{
+      background-image: url(assets/images/background-desktop.png);
+      background-repeat: no-repeat;
+      background-size: cover;          
+      background-position: center; 
+      color: white;
+      margin-top: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .all{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+    button{
+      background-color: hsl(7, 71%, 60%);
+      width: 300px;
+      height: 42px;
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+    input{
+      width: 300px;
+      height: 35px;
+      background-color: hsl(248, 70%, 10%);
+      border-radius: 8px;
+      color: white;
+    }
+    .inputs{
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    h1{
+      font-size: 45px;
+    }
+    .gray{
+      color: rgb(166, 166, 166);
+    }
+    .row{
+      text-align: center;
+    }
+
+    .all .ticket {
+      display: none;
+      margin-top: 50px;
+      padding: 15px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    h2{
+      font-size: 42px;
+    }
+    .myname{
+      color: hsl(7, 71%, 60%);
+    }
+
+    .myemail{
+      color: hsl(7, 71%, 60%);
+    }
+    .container{
+      background-image: url(assets/images/pattern-ticket.svg);
+      background-repeat: no-repeat;
+      height: 290px;
+      width: 590px;
+      text-align: start;
+      padding: 10px;
+    }
+    .row2{
+      display: flex;
+      gap: 4px;
+    }
+    .myavatar{
+      object-fit: cover;
+    }
+    @media screen and (max-width:450px) {
+      .container{
+        background-color: rgba(114, 125, 182, 0.441);
+        background-image: none;
+        width: 340px;
+        border-radius: 10px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="all ">
+    <div class="row">
+      <img src="assets/images/logo-full.svg" alt="">
+
+      <h1>Your Journey to Coding Conf <br> 2025 Starts Here!</h1>
+      <span class="gray"> Secure your spot at next year's biggest coding conference.</span>
+    </div>
+
+    
+    <div class="inputs">
+
+      <label>Upload Avatar</label>
+      <input class="avatar" type="file" accept="image/*" placeholder="Drag and drop or click to upload">
+  
+      <label>Full Name</label>
+      <input class="fulln" type="text">
+  
+      <label>Email Address</label>
+      <input class="email" type="text"  placeholder="example@email.com">
+  
+      <label>GitHub Username</label>
+      <input class="github" type="text" placeholder="@yourusername">
+  
+      <button onclick="ticket()">Generate My Ticket</button>
+
+    </div>
+
+    <div  class="ticket">
+      <img src="assets/images/logo-full.svg" alt="">
+      <h2>Congrats, <span class="myname"></span>! <br>Your ticket is ready.</h2>
+      <p>We’ve emailed it to <br> <span class="myemail"></span>and will send updates in <br> the run up to the event.</p>
+      <div class="container">
+        <img src="assets/images/logo-full.svg" alt="">
+        <p>Jan 31, 2025 /  Austin, TX</p>
+        <div class="row2">
+          <img class="myavatar" src="" alt="Avatar" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div class="text">
+            <p><span class="myname2"></span></p>
+            <p><span class="mygithub"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+
+  <script>
+    function ticket() {
+      const name = document.querySelector('.fulln').value;
+      const email = document.querySelector('.email').value;
+      const github = document.querySelector('.github').value;
+      const avatar = document.querySelector('.avatar').value;
+      const avatarInput = document.querySelector('.avatar');
+      const avatarFile = avatarInput.files[0];
+
+      if (avatarFile) {
+        let reader = new FileReader();
+
+        reader.onload = function() {
+          let avatarImage = document.querySelector('.myavatar');
+          avatarImage.src = reader.result;
+        };
+
+        reader.readAsDataURL(avatarFile);
+      }
+      
+      document.querySelector('.myname').innerText = name;
+      document.querySelector('.myname2').innerText = name;
+
+      document.querySelector('.myemail').innerText = email;
+      document.querySelector('.mygithub').innerText = github;
+      document.querySelector('.myavatar').innerText = avatar;
+
+      document.querySelector('.row').style.display = 'none';
+      document.querySelector('.inputs').style.display = 'none';
+      document.querySelector('.ticket').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
